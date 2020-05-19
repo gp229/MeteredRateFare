@@ -1,0 +1,26 @@
+<div class="container">
+  <h1>Get Fare</h1>
+  <form #fareForm="ngForm" (ngSubmit)="onSubmit(); fareForm.reset()">
+    <div class="form-group">
+      <label for="miles">Number of miles traveled while traveling below 6 mph</label>
+      <input type="number" step=".2" class="form-control" id="miles" required appPrePositiveNumber [(ngModel)]="fare.milesBelow6" name="miles" #miles="ngModel">
+      <div [hidden]="miles.valid || miles.pristine" class="alert alert-danger">Miles is required (Cannot be below 0)</div>
+    </div>
+    <div class="form-group">
+      <label for="minutes">Number of minutes while traveling above 6 mph</label>
+      <input type="number" class="form-control" id="minutes" required appPrePositiveNumber [(ngModel)]="fare.minutesAbove6" name="minutes" #minutes="ngModel">
+      <div [hidden]="minutes.valid || minutes.pristine" class="alert alert-danger">Minutes is required (Cannot be below 0)</div>
+    </div>
+    <div class="form-group">
+      <label for="date">Start Date of Fare</label>
+      <input type="datetime-local" class="form-control" id="date" required [(ngModel)]="fare.startTime" name="date" #date="ngModel">
+      <div [hidden]="date.valid || date.pristine" class="alert alert-danger">Date is required</div>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-success" [disabled]="!fareForm.form.valid">Submit</button>
+    </div>
+    <div>
+      <strong id="ok">{{value}}</strong>
+    </div>
+  </form>
+</div>
